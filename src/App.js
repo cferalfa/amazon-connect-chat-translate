@@ -4,71 +4,85 @@ import '@aws-amplify/ui-react/styles.css';
 import awsconfig from './aws-exports';
 import React, { useState, useEffect } from 'react';
 import './App.css';
-import 'semantic-ui-less/semantic.less';
+import Ccp from './components/ccp';
 
-// Main Component
+// Component
 function App({ signOut, user }) {
   const [isConfigured, setIsConfigured] = useState(false);
 
   useEffect(() => {
-    configureAuth(); // Configure Amplify Authentication
-    initializeCCP(); // Initialize Amazon Connect CCP
+    configureAuth();
+    initializeCCP();
   }, []);
 
-  // Function to configure AWS Amplify authentication
+  // Configure AWS Amplify
   const configureAuth = () => {
     Amplify.configure(awsconfig);
     setIsConfigured(true);
   };
 
-  // Function to initialize Amazon Connect CCP
+  // Initialize Amazon Connect CCP
   const initializeCCP = () => {
     const ccpContainer = document.getElementById('ccp-container');
 
     if (!window.connect) {
-      console.error('Amazon Connect Streams API is not loaded.');
+      console.error('Amazon Connect Streams API not loaded.');
       return;
     }
 
     if (ccpContainer) {
-      console.log('Initializing Amazon Connect CCP...');
       window.connect.core.initCCP(ccpContainer, {
-        ccpUrl: 'https://synaptis-ai.my.connect.aws/connect/ccp-v2/', // Your CCP URL
-        loginPopup: false, // Prevent login popups
-        region: 'eu-central-1', // Your AWS region
-        softphone: {
-          allowFramedSoftphone: true, // Allow iframe usage
-        },
+        ccpUrl: 'https://synaptis-ai.my.connect.aws/connect/ccp-v2/',
+        loginPopup: false,
+        softphone: { allowFramedSoftphone: true },
+        region: 'eu-central-1',
       });
 
-      // Add event listeners to log agent state changes
+      // Listen for agent state changes
       window.connect.agent((agent) => {
-        console.log('Agent is now:', agent.getState().name);
+        console.log('Agent state:', agent.getState().name);
         agent.onStateChange((state) => {
-          console.log('New agent state:', state.newState);
+          console.log('Agent new state:', state.newState);
         });
       });
 
-      // Add event listener for new contacts
-      window.connect.contact((contact) => {
-        console.log('New contact initiated:', contact);
-        contact.onAccepted(() => console.log('Contact accepted'));
-        contact.onEnded(() => console.log('Contact ended'));
+      // Error handling for postMessage issues
+      window.addEventListener('message', (event) => {
+        if (event.origin !== 'https://synaptis-ai.my.connect.aws') {
+          console.warn('Message from unauthorized origin:', event.origin);
+          return;
+        }
+        console.log('Message from CCP:', event.data);
       });
     } else {
-      console.error('CCP container element not found.');
+      console.error('CCP container not found.');
     }
   };
 
   return (
     <div className="main-container">
-      {/* CCP Container */}
-      <div id="ccp-container" className="ccp-container"></div>
+      {/* Left: Agent Workspace */}
+      <div className="agent-workspace">
+        <iframe
+          src="https://synaptis-ai.my.connect.aws/agent-app-v2/"
+          title="Agent Workspace"
+          className="agent-workspace-iframe"
+        ></iframe>
+      </div>
 
-      {/* Other Content */}
-      <div className="content">
-        <h1>Welcome, {user.username}</h1>
-        <button onClick={signOut}>Sign Out</button>
+      {/* Right: CCP and Translate */}
+      <div className="right-section">
+        {isConfigured && (
+          <>
+            {/* CCP Container */}
+            <div id="ccp-container" style={{ height: '500px', paddingTop: '15px', paddingLeft: '15px', width: '330px' }}></div>
+
+            {/* Translate Box */}
+            <div id="translate-box">
+              <Ccp user={user} signOut={signOut} />
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
