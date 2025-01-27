@@ -1,85 +1,11 @@
-/* General layout */
-.main-container {
-  display: flex;
-  height: 100vh;
-  background-color: #f9f9f9;
-  overflow: hidden;
-}
- 
-/* Left section: Agent Workspace */
-.agent-workspace {
-  flex: 1; /* Takes remaining space dynamically */
-  height: 100%;
-  background-color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
- 
-.agent-workspace iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
- 
-/* Right section: CCP and Translate */
-.right-section {
-  width: 25%;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background-color: #f4f4f4;
-  gap: 10px;
-  align-items: stretch; /* Ensures both children take full width */
-}
- 
-/* Ensure CCP & Translate Box take equal space */
-#ccp-container, #translate-box {
-  flex: 1; /* Equal height */
-  width: 100% !important; /* Force full width */
-  max-width: none !important; /* Prevent fixed width issues */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
- 
-/* CCP styling */
 #ccp-container {
-  background-color: #e8e8e8;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  overflow: hidden;
+  height:500px;
+  padding-top: 15px;
+  padding-left: 15px;
+  width: 330px;
 }
- 
-/* Translate Box styling */
-#translate-box {
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  overflow: hidden;
-}
- 
-/* Responsive adjustments for smaller screens */
-@media (max-width: 1024px) {
-  .main-container {
-    flex-direction: column;
-  }
- 
-  .agent-workspace {
-    width: 100%;
-    height: 50vh; /* Make workspace take 50% of viewport height */
-  }
- 
-  .right-section {
-    width: 100%;
-    height: 50vh;
-  }
-}
- 
-/* Optional body styling */
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  margin: 0;
-  background-color: #f8f8f8;
+
+.ui.toggle.checkbox input:checked ~ .box:before,
+.ui.toggle.checkbox input:checked ~ .coloring.red:before {
+background: #F25F5C !important;
 }
