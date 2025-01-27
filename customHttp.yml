@@ -1,12 +1,12 @@
 customHeaders:
-  - pattern: "**/*"
+  - pattern: "/agent-app-v2*"
     headers:
       - key: "Content-Security-Policy"
-        value: "frame-ancestors 'self' https://synaptis-ai.my.connect.aws https://main.d12jgc5bq37qt2.amplifyapp.com;"
+        value: "frame-ancestors 'self' https://main.d12jgc5bg37qt2.amplifyapp.com;"
       - key: "X-Frame-Options"
-        value: "ALLOW-FROM https://main.d12jgc5bq37qt2.amplifyapp.com"
+        value: "ALLOW-FROM https://main.d12jgc5bg37qt2.amplifyapp.com"
       - key: "Access-Control-Allow-Origin"
-        value: "https://main.d12jgc5bq37qt2.amplifyapp.com"
+        value: "https://main.d12jgc5bg37qt2.amplifyapp.com"
       - key: "Access-Control-Allow-Methods"
         value: "GET, POST, OPTIONS"
       - key: "Access-Control-Allow-Headers"
