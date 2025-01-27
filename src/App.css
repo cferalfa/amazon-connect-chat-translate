@@ -31,20 +31,33 @@
 /* CCP styling */
 #ccp-container {
   width: 100%;
-  height: 300px; /* Adjust height as needed */
+  height: 50%; /* Make CCP container take up half of the right section */
   background-color: #e8e8e8;
   border: 1px solid #ccc;
   margin-bottom: 10px; /* Space between CCP and Translate Box */
   border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Translate Box styling */
 #translate-box {
   width: 100%;
-  flex-grow: 1; /* Use remaining space below CCP */
+  height: 50%; /* Make Translate box take up the other half of the right section */
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Optional body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background-color: #f8f8f8;
 }
