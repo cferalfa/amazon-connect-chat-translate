@@ -31,11 +31,12 @@ function App({ signOut, user }) {
     }
  
     if (ccpContainer) {
+      console.log("Initializing Amazon Connect CCP...");
       window.connect.core.initCCP(ccpContainer, {
-        ccpUrl: "https://synaptis-ai.my.connect.aws/connect/ccp-v2/", // Replace with your Amazon Connect instance URL
-        loginPopup: false, // Set to true if login via popup is needed
+        ccpUrl: "https://synaptis-ai.my.connect.aws/connect/ccp-v2/", 
+        loginPopup: false,
         softphone: { allowFramedSoftphone: true },
-        region: "us-east-1"
+        region: "eu-central-1"
       });
  
       // Listen for Agent State Changes
@@ -45,6 +46,7 @@ function App({ signOut, user }) {
           console.log("New agent state:", state.newState);
         });
       });
+ 
     } else {
       console.error("CCP container not found.");
     }
@@ -54,7 +56,11 @@ function App({ signOut, user }) {
 <div className="main-container">
       {/* Left section for Amazon Connect Agent Workspace */}
 <div className="agent-workspace">
-<div id="agent-workspace"></div>
+<iframe 
+          src="https://synaptis-ai.my.connect.aws/agent-app-v2/" 
+          title="Agent Workspace"
+          className="agent-workspace-iframe">
+</iframe>
 </div>
  
       {/* Right section for CCP and Translate */}
