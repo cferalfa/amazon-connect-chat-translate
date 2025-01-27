@@ -7,46 +7,24 @@
 <meta name="theme-color" content="#000000" />
 <meta name="Translate Blog" content="CCP and Amazon Translate" />
 <link rel="apple-touch-icon" href="https://dl32tyuy2mmv6.cloudfront.net/img/favicon.png" />
-<!-- Web Manifest -->
 <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
- 
-    <!-- Page Title -->
 <title>Amazon Connect with Translate Demo</title>
  
-    <!-- Optional Styles -->
-<style>
-      body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8f8f8;
-        margin: 0;
-        padding: 0;
-      }
-</style>
+    <!-- Load Amazon Connect Streams API -->
+<script>
+      window.onload = function () {
+        const script = document.createElement("script");
+        script.src = "https://synaptis-ai.my.connect.aws/connect/ccp-v2";
+        script.async = true;
+        script.onload = () => console.log("Amazon Connect CCP loaded.");
+        script.onerror = () => console.error("Failed to load Amazon Connect CCP.");
+        document.head.appendChild(script);
+      };
+</script>
 </head>
  
   <body>
 <noscript>You need to enable JavaScript to run this app.</noscript>
- 
-    <!-- React Root Container -->
 <div id="root"></div>
- 
-    <!-- Amazon Connect Streams API -->
-<script src="https://synaptis-ai.my.connect.aws/connect/ccp-v2"></script>
- 
-    <!-- Optional: Handle Script Loading Errors -->
-<script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const ccpScript = document.createElement("script");
-        ccpScript.src = "https://synaptis-ai.my.connect.aws/connect/ccp-v2";
-        ccpScript.async = true;
-        ccpScript.onload = function () {
-          console.log("Amazon Connect CCP loaded successfully.");
-        };
-        ccpScript.onerror = function () {
-          console.error("Failed to load Amazon Connect CCP.");
-        };
-        document.body.appendChild(ccpScript);
-      });
-</script>
 </body>
 </html>
