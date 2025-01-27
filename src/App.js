@@ -7,7 +7,6 @@ import './App.css';
 import 'semantic-ui-less/semantic.less';
 import Ccp from './components/ccp';
  
-// Component
 function App({ signOut, user }) {
   const [isConfigured, setIsConfigured] = useState(false);
  
@@ -22,14 +21,21 @@ function App({ signOut, user }) {
     setIsConfigured(true);
   };
  
-  // Initialize Amazon Connect CCP
+  // Initialize Amazon Connect CCP safely
   const initializeCCP = () => {
-    if (window.connect) {
-      window.connect.core.initCCP(document.getElementById("ccp-container"), {
-        ccpUrl: "https://synaptis-ai.my.connect.aws/connect/ccp-v2/",  // Replace with the correct CCP URL
-        loginPopup: false,  // Set to true if you want login via a popup
-        softphone: { allowFramedSoftphone: true },  // Allows softphone within iframe
-        region: "us-east-1"  // Replace with your AWS region
+    const ccpContainer = document.getElementById("ccp-container");
+ 
+    if (!window.connect) {
+      console.error("Amazon Connect Streams API not loaded.");
+      return;
+    }
+ 
+    if (ccpContainer) {
+      window.connect.core.initCCP(ccpContainer, {
+        ccpUrl: "https://synaptis-ai.my.connect.aws/connect/ccp-v2/", // Replace with your Amazon Connect instance URL
+        loginPopup: false, // Set to true if login via popup is needed
+        softphone: { allowFramedSoftphone: true },
+        region: "us-east-1"
       });
  
       // Listen for Agent State Changes
@@ -40,7 +46,7 @@ function App({ signOut, user }) {
         });
       });
     } else {
-      console.error("Amazon Connect Streams API not loaded.");
+      console.error("CCP container not found.");
     }
   };
  
