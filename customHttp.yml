@@ -2,9 +2,9 @@ customHeaders:
   - pattern: "**/*"
     headers:
       - key: "Content-Security-Policy"
-        value: "frame-ancestors 'self' https://synaptis-ai.my.connect.aws;"
+        value: "frame-ancestors 'self' https://*.connect.aws;"
       - key: "X-Frame-Options"
-        value: "ALLOW-FROM https://synaptis-ai.my.connect.aws"
+        value: "ALLOW-FROM https://*.connect.aws"
       - key: "Access-Control-Allow-Origin"
         value: "*"
       - key: "Access-Control-Allow-Methods"
