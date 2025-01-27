@@ -179,10 +179,8 @@ const Ccp = () => {
             });
         }
         else {
-            console.error("CDEBUG ===> ChatSession not available, retrying in 3 seconds...");
-            setTimeout(() => {
-                subscribeConnectEvents();
-            }, 3000);
+            console.log("CDEBUG ===> waiting 3s");
+            setTimeout(function() { subscribeConnectEvents(); }, 3000);
         }
     };
 
@@ -190,28 +188,23 @@ const Ccp = () => {
     // ***** 
     // Loading CCP
     // *****
-useEffect(() => {
-    const connectUrl = process.env.REACT_APP_CONNECT_INSTANCE_URL;
-    try {
+    useEffect(() => {
+        const connectUrl = process.env.REACT_APP_CONNECT_INSTANCE_URL;
         window.connect.agentApp.initApp(
             "ccp",
             "ccp-container",
-            `${connectUrl}/connect/ccp-v2/`, {
-                ccpParams: {
+            connectUrl + "/connect/ccp-v2/", { 
+                ccpParams: { 
                     region: process.env.REACT_APP_CONNECT_REGION,
-                    pageOptions: {
+                    pageOptions: {                  // optional
                         enableAudioDeviceSettings: true, // optional, defaults to 'false'
-                        enablePhoneTypeSettings: true, // optional, defaults to 'true'
-                    },
-                },
+                        enablePhoneTypeSettings: true // optional, defaults to 'true'
+                      }
+                } 
             }
         );
-        console.log("CDEBUG ===> CCP initialized successfully");
         subscribeConnectEvents();
-    } catch (error) {
-        console.error("CDEBUG ===> CCP initialization failed", error);
-    }
-}, []);
+    }, []);
 
 
     return (
@@ -226,15 +219,6 @@ useEffect(() => {
           </Grid>
         </main>
     );
-};
-// Helper function: Add or update an item in an array
-const upsert = (array, item) => {
-    const i = array.findIndex(_item => _item.contactId === item.contactId);
-    if (i > -1) {
-        array[i] = item; // Update existing item
-    } else {
-        array.push(item); // Add new item
-    }
 };
 
 export default Ccp;
