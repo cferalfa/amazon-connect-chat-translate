@@ -8,7 +8,7 @@
  
 /* Left section: Agent Workspace */
 .agent-workspace {
-  flex: 1;
+  flex: 1; /* Takes remaining space dynamically */
   height: 100%;
   background-color: #ffffff;
   display: flex;
@@ -30,33 +30,51 @@
   padding: 10px;
   background-color: #f4f4f4;
   gap: 10px;
+  align-items: stretch; /* Ensures both children take full width */
+}
+ 
+/* Ensure CCP & Translate Box take equal space */
+#ccp-container, #translate-box {
+  flex: 1; /* Equal height */
+  width: 100% !important; /* Force full width */
+  max-width: none !important; /* Prevent fixed width issues */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
  
 /* CCP styling */
 #ccp-container {
-  flex: 1;
-  width: 100%;
   background-color: #e8e8e8;
   border: 1px solid #ccc;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
 }
  
 /* Translate Box styling */
 #translate-box {
-  flex: 1;
-  width: 100%;
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+ 
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
+  .main-container {
+    flex-direction: column;
+  }
+ 
+  .agent-workspace {
+    width: 100%;
+    height: 50vh; /* Make workspace take 50% of viewport height */
+  }
+ 
+  .right-section {
+    width: 100%;
+    height: 50vh;
+  }
 }
  
 /* Optional body styling */
