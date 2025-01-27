@@ -57,10 +57,11 @@ function App({ signOut, user }) {
       {/* Left section for Amazon Connect Agent Workspace */}
 <div className="agent-workspace">
 <iframe 
-          src="https://synaptis-ai.my.connect.aws/agent-app-v2/" 
-          title="Agent Workspace"
-          className="agent-workspace-iframe">
-</iframe>
+    src="https://synaptis-ai.my.connect.aws/agent-app-v2/" 
+    title="Agent Workspace"
+    className="agent-workspace-iframe"
+    sandbox="allow-same-origin allow-scripts allow-forms allow-modals"
+></iframe>
 </div>
  
       {/* Right section for CCP and Translate */}
