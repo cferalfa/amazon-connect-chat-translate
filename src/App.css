@@ -1,60 +1,64 @@
 /* General layout */
 .main-container {
   display: flex;
-  height: 100vh;
+  height: 100vh; /* Full screen height */
   background-color: #f9f9f9;
+  overflow: hidden; /* Prevent unwanted scrolling */
 }
-
+ 
 /* Left section: Agent Workspace */
 .agent-workspace {
-  width: 65%; /* Adjust percentage as needed */
+  flex: 1; /* Takes remaining space dynamically */
   height: 100%;
   background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-
-.agent-workspace-iframe {
+ 
+.agent-workspace iframe {
   width: 100%;
   height: 100%;
   border: none;
 }
-
+ 
 /* Right section: CCP and Translate */
 .right-section {
-  width: 25%; /* Adjust percentage as needed */
+  width: 35%; /* Fixed width for right-side section */
   display: flex;
   flex-direction: column;
   padding: 10px;
   background-color: #f4f4f4;
-  overflow-y: auto;
+  gap: 10px; /* Space between CCP and Translate */
 }
-
+ 
 /* CCP styling */
 #ccp-container {
+  flex: 1; /* Occupies 50% of right section */
   width: 100%;
-  height: 40%; /* Make CCP container take up half of the right section */
   background-color: #e8e8e8;
   border: 1px solid #ccc;
-  margin-bottom: 10px; /* Space between CCP and Translate Box */
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
-
+ 
 /* Translate Box styling */
 #translate-box {
+  flex: 1; /* Occupies 50% of right section */
   width: 100%;
-  height: 60%; /* Make Translate box take up the other half of the right section */
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 5px;
   padding: 10px;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
+ 
 /* Optional body styling */
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
